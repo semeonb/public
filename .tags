@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CREATE_IF_NEEDED	googleCloud.py	/^CREATE_IF_NEEDED = 'CREATE_IF_NEEDED'$/;"	v
+CSV	googleCloud.py	/^CSV = 'CSV'$/;"	v
+GoogleCloud	googleCloud.py	/^class GoogleCloud(object):$/;"	c
+WRITE_APPEND	googleCloud.py	/^WRITE_APPEND = 'WRITE_APPEND'$/;"	v
+__init__	googleCloud.py	/^    def __init__(self, project_id):$/;"	m	class:GoogleCloud
+bigquery	googleCloud.py	/^from google.cloud import bigquery$/;"	i
+bqSchemaObj	googleCloud.py	/^    def bqSchemaObj(schemaObj):$/;"	f	function:genSchemaFromDict
+bqtable2gs	googleCloud.py	/^    def bqtable2gs(self, dataset_name, table_name, bucket, gspath, file_name,$/;"	m	class:GoogleCloud
+client	googleCloud.py	/^    def client(self, project_id):$/;"	m	class:GoogleCloud
+createTable	googleCloud.py	/^    def createTable(self, table, dataset, schema):$/;"	m	class:GoogleCloud
+execute_query	googleCloud.py	/^    def execute_query(self, query, UseLegacySql=False):$/;"	m	class:GoogleCloud
+genSchemaFromDict	googleCloud.py	/^def genSchemaFromDict(schemaDict):$/;"	f
+list_blobs	googleCloud.py	/^    def list_blobs(self, bucket_name, path, endsWith=''):$/;"	m	class:GoogleCloud
+load	googleCloud.py	/^    def load(self, dataset, table, path, source_format, schema=None, bad_record_limit=0,$/;"	m	class:GoogleCloud
+path	googleCloud.py	/^from os import path$/;"	i
+query2table	googleCloud.py	/^    def query2table(self, query, dest_table, dest_dataset, create_disposition=CREATE_IF_NEEDED,$/;"	m	class:GoogleCloud
+storage	googleCloud.py	/^from google.cloud import storage$/;"	i
