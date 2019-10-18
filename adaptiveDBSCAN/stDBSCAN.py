@@ -46,13 +46,13 @@ class Clusters(object):
         cnt = df.shape[0]
         center = [sum(df[self.latCol])/cnt, sum(df[self.lonCol])/cnt]
 
-        def calcDist(row):
+        def _calcDist(row):
             fwd_azimuth, back_azimuth, distance = \
                 self.geodesic.inv(lats1=center[0], lons1=center[1], lats2=row[self.latCol],
                                   lons2=row[self.lonCol])
             return (cos(fwd_azimuth) * distance, sin(fwd_azimuth) * distance)
 
-        df['xy'] = df.apply(calcDist, axis=1)
+        df['xy'] = df.apply(_calcDist, axis=1)
         df[['x', 'y']] = pd.DataFrame(df['xy'].tolist(), index=df.index)
         dbscan = DBSCAN(eps=self.metersThresh, min_samples=self.minNeigh)
 
