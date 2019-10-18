@@ -5,6 +5,8 @@ from sklearn.cluster import DBSCAN
 from math import sin, cos
 import pyproj
 
+import utils
+
 
 class Clusters(object):
 
@@ -24,6 +26,7 @@ class Clusters(object):
         self.geodesic = pyproj.Geod(ellps='WGS84')
 
     def splitFrameToPeriods(self):
+        periodId = 0
         indexList = []
         neighborsList = []
         dfSorted = self.df.sort_values(by=self.timeCol).copy()
@@ -32,11 +35,12 @@ class Clusters(object):
             if values['delta'].total_seconds() <= self.tempThresh:
                 neighborsList.append(index)
             else:
-                indexList.append(neighborsList)
+                indexList.append([periodId, neighborsList])
                 neighborsList = []
                 neighborsList.append(index)
-        indexList.append(neighborsList)
-        return [self.df.loc[i] for i in indexList]
+                periodId += 1
+        indexList.append([periodId, neighborsList])
+        return [[i[0], self.df.loc[i[1]]] for i in indexList]
 
     def cluster(self, df):
         cnt = df.shape[0]
@@ -53,18 +57,23 @@ class Clusters(object):
         dbscan = DBSCAN(eps=self.metersThresh, min_samples=self.minNeigh)
 
         dfClusters = pd.DataFrame(dbscan.fit_predict(df[['x', 'y']].values),
-                                  columns=[self.spatialClusterCol])
+                                  columns=[self.spatialClusterCol], index=df.index.values)
         return dfClusters
+
+    def calculate(self, data):
+        ix = data[0]
+        df = data[1].copy()
+        df[self.temporalClusterCol] = ix
+        if df.shape[0] >= self.minNeigh:
+            return pd.merge(left=df, right=self.cluster(df.copy()), left_index=True,
+                            right_index=True)
+        else:
+            df[self.spatialClusterCol] = self.noise
+            return df
 
     def getClusters(self):
         results = []
         dfList = self.splitFrameToPeriods()
-        for ix, df in enumerate(dfList):
-            df[self.temporalClusterCol] = ix
-            if df.shape[0] >= self.minNeigh:
-                results.append(pd.merge(left=df, right=self.cluster(df.copy()), left_index=True,
-                                        right_index=True))
-            else:
-                df[self.spatialClusterCol] = self.noise
-                results.append(df)
-        return pd.concat(results)
+        results.append(utils.run_in_procs(func=self.calculate, func_args=dfList,
+                                          processes=len(dfList)))
+        return pd.concat(results[0])
