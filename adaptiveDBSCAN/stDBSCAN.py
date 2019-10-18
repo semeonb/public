@@ -2,16 +2,8 @@ import pandas as pd
 
 import scipy.spatial as spatial
 from sklearn.cluster import DBSCAN
-from math import radians, sin, cos, asin, sqrt
+from math import sin, cos
 import pyproj
-
-
-def haversine(lon1, lat1, lon2, lat2):
-    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-    a = sin(dlat / 2) * 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) * 2
-    return 2 * 6371 * asin(sqrt(a))
 
 
 class Clusters(object):
@@ -24,7 +16,7 @@ class Clusters(object):
         self.spatialClusterCol = spatialClusterCol  # Name of the spatial cluster column to give
         self.temporalClusterCol = temporalClusterCol  # Name of the temporal cluster column to give
         self.latCol = latCol  # Latitude column name
-        self.lonCol = lonCol  # Longtitude column name
+        self.lonCol = lonCol  # Longitude column name
         self.timeCol = timeCol  # time column in the dataframe
         self.df = df  # dataframe to build the clustering on
         self.kdtree = spatial.cKDTree(df[[latCol, lonCol]])  # Build kd-tree based on dataframe
