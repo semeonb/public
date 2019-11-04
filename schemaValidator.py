@@ -36,6 +36,8 @@ class Validate(object):
         self.bq_integer = 'INTEGER'
         self.bq_float = 'FLOAT'
         self.bq_bool = 'BOOLEAN'
+        self.bq_nullable = 'NULLABLE'
+        self.bq_repeated = 'REPEATED'
         self.list = 'list'
 
     def _buildFields(self, item):
@@ -117,13 +119,12 @@ class Validate(object):
                         nestedDict = {}
                         for nestedKey, nestedValue in d.items():
                             if nestedKey in nestedSchema:
-                                nestedDict[nestedKey] = \
-                                    self._validateLine(d, nestedSchema)
+                                nestedDict[nestedKey] = self._validateLine(d, nestedSchema)
                         nestedList.append(self._validateLine(d, nestedSchema))
                     transData[dataKey] = nestedList
                 else:
-                    if schemaValue['mode'] == 'NULLABLE':
+                    if schemaValue['mode'] == self.bq_nullable:
                         transData[dataKey] = self._validateType(schemaValue, dataValue)
-                    elif schemaValue['mode'] == 'REPEATED':
+                    elif schemaValue['mode'] == self.bq_repeated:
                         transData[dataKey] = self._validateRepeated(schemaValue, dataValue)
         return transData
