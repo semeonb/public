@@ -3,23 +3,18 @@ import json
 """
 Author: Semeon Balagula
 The script receives Google BigQuery schema in json format and ndjson data line.
-
 Usage:
-
 import json
 import schemaValidator
-
 schemaFile = [path to your schema file]
 dataFile = [path to your data file]
 with open(schemaFile) as schema_data:
     jsonSchema = json.load(schema_data)
-
 with open(dataFile) as myfile:
     for data in myfile:
         vldt = schemaValidator.Validate(jsonSchema, data)
         x = vldt._validateLine()
         print(x)
-
 """
 
 
@@ -42,19 +37,21 @@ class Validate(object):
 
     def _buildFields(self, item):
         fieldsDict = {}
-        if 'fields' in item:
-            for f in item['fields']:
-                fieldsDict[f['name']] = {'type': f['type'], 'mode': f['mode'],
-                                         'fields': self._buildFields(f)}
-        else:
-            pass
+        for f in item.get('fields', []):
+            fieldsDict[f['name']] = {
+                'type': f['type'],
+                'mode': f['mode'],
+                'fields': self._buildFields(f)
+                }
         return fieldsDict
 
     def _jsonSchemaTransform(self):
         trans_schema = {}
         for i in self.jsonSchema:
-            trans_schema[i['name']] = {'type': i['type'], 'mode': i['mode'],
-                                       'fields': self._buildFields(i)}
+            trans_schema[i['name']] = {
+                'type': i['type'],
+                'mode': i['mode'],
+                'fields': self._buildFields(i)}
         return trans_schema
 
     def _validateInteger(self, value):
@@ -106,25 +103,24 @@ class Validate(object):
         if not schema:
             data, schema = self.data, self.trans_schema
         for dataKey, dataValue in data.items():
-            if dataKey in schema:
-                schemaValue = schema[dataKey]
-                if schemaValue['type'] == self.bq_record:
-                    nestedList = []
-                    nestedSchema = schemaValue['fields']
-                    # if object is not list, convert it into one
-                    if isinstance(dataValue, dict):
-                        dataValue = [dataValue]
-                    # data value is a list of dictionaries
-                    for d in dataValue:
-                        nestedDict = {}
-                        for nestedKey, nestedValue in d.items():
-                            if nestedKey in nestedSchema:
-                                nestedDict[nestedKey] = self._validateLine(d, nestedSchema)
-                        nestedList.append(self._validateLine(d, nestedSchema))
-                    transData[dataKey] = nestedList
-                else:
-                    if schemaValue['mode'] == self.bq_nullable:
-                        transData[dataKey] = self._validateType(schemaValue, dataValue)
-                    elif schemaValue['mode'] == self.bq_repeated:
-                        transData[dataKey] = self._validateRepeated(schemaValue, dataValue)
+            schemaValue = schema.get(dataKey)
+            if schemaValue['type'] == self.bq_record:
+                nestedList = []
+                nestedSchema = schemaValue['fields']
+                # if object is not list, convert it into one
+                if isinstance(dataValue, dict):
+                    dataValue = [dataValue]
+                # data value is a list of dictionaries
+                for d in dataValue:
+                    nestedDict = {}
+                    for nestedKey, nestedValue in d.items():
+                        if nestedSchema.get(nestedKey):
+                            nestedDict[nestedKey] = self._validateLine(d, nestedSchema)
+                    nestedList.append(self._validateLine(d, nestedSchema))
+                transData[dataKey] = nestedList
+            else:
+                if schemaValue['mode'] == self.bq_nullable:
+                    transData[dataKey] = self._validateType(schemaValue, dataValue)
+                elif schemaValue['mode'] == self.bq_repeated:
+                    transData[dataKey] = self._validateRepeated(schemaValue, dataValue)
         return transData
