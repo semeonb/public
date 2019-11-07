@@ -12,13 +12,13 @@ with open(schemaFile) as schema_data:
     jsonSchema = json.load(schema_data)
 with open(dataFile) as myfile:
     for data in myfile:
-        vldt = schemaValidator.Validate(jsonSchema, data)
-        x = vldt._validateLine()
+        vldt = schemaValidator.ValidateRow(jsonSchema, data)
+        x = vldt.validate()
         print(x)
 """
 
 
-class Validate(object):
+class ValidateRow(object):
 
     def __init__(self, jsonSchema, data):
 
@@ -98,7 +98,7 @@ class Validate(object):
     def _validateRepeated(self, schema, value):
         return [self._validateType(schema['type'], x) for x in value]
 
-    def _validateLine(self, data=None, schema=None):
+    def validate(self, data=None, schema=None):
         transData = {}
         if not schema:
             data, schema = self.data, self.trans_schema
@@ -115,8 +115,8 @@ class Validate(object):
                     nestedDict = {}
                     for nestedKey, nestedValue in d.items():
                         if nestedSchema.get(nestedKey):
-                            nestedDict[nestedKey] = self._validateLine(d, nestedSchema)
-                    nestedList.append(self._validateLine(d, nestedSchema))
+                            nestedDict[nestedKey] = self.validate(d, nestedSchema)
+                    nestedList.append(self.validate(d, nestedSchema))
                 transData[dataKey] = nestedList
             else:
                 if schemaValue['mode'] == self.bq_nullable:
