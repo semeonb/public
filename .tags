@@ -6,18 +6,126 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 CREATE_IF_NEEDED	googleCloud.py	/^CREATE_IF_NEEDED = 'CREATE_IF_NEEDED'$/;"	v
 CSV	googleCloud.py	/^CSV = 'CSV'$/;"	v
+Clusters	ADA_DBSCAN/stDBSCAN.py	/^class Clusters(object):$/;"	c
+DBSCAN	ADA_DBSCAN/stDBSCAN.py	/^from sklearn.cluster import DBSCAN$/;"	i
+Dense	leadScoring/neuralNets.py	/^from keras.layers import Dense, Dropout$/;"	i
+Dropout	leadScoring/neuralNets.py	/^from keras.layers import Dense, Dropout$/;"	i
+EarlyStopping	leadScoring/neuralNets.py	/^from tensorflow.keras.callbacks import EarlyStopping$/;"	i
 GoogleCloud	googleCloud.py	/^class GoogleCloud(object):$/;"	c
+Keras	leadScoring/neuralNets.py	/^class Keras(object):$/;"	c
+MLPRegressor	leadScoring/neuralNets.py	/^from sklearn.neural_network import MLPRegressor$/;"	i
+ModelCheckpoint	leadScoring/neuralNets.py	/^from tensorflow.keras.callbacks import ModelCheckpoint$/;"	i
+PCA	leadScoring/modelScripts.py	/^from sklearn.decomposition import PCA$/;"	i
+SGDClassifier	leadScoring/logReg.py	/^from sklearn.linear_model import SGDClassifier$/;"	i
+Sequential	leadScoring/neuralNets.py	/^from keras.models import Sequential$/;"	i
+ValidateRow	schemaValidator.py	/^class ValidateRow(object):$/;"	c
 WRITE_APPEND	googleCloud.py	/^WRITE_APPEND = 'WRITE_APPEND'$/;"	v
+__init__	ADA_DBSCAN/adaptive_dbscan.py	/^    def __init__(self, coordinates, time_series, min_pts):$/;"	m	class:cluster
+__init__	ADA_DBSCAN/stDBSCAN.py	/^    def __init__(self, df, metersThresh, tempThresh, minNeigh=2, spatialClusterCol='s_cluster',$/;"	m	class:Clusters
 __init__	googleCloud.py	/^    def __init__(self, project_id):$/;"	m	class:GoogleCloud
+__init__	leadScoring/neuralNets.py	/^    def __init__(self, loss, inputDim, outputDim, hlActivation='relu', olActivation='sigmoid',$/;"	m	class:Keras
+__init__	schemaValidator.py	/^    def __init__(self, jsonSchema, data):$/;"	m	class:ValidateRow
+_avg_speed	ADA_DBSCAN/adaptive_dbscan.py	/^    def _avg_speed(self, x, y):$/;"	m	class:cluster
+_buildFields	schemaValidator.py	/^    def _buildFields(self, item):$/;"	m	class:ValidateRow
+_calcDist	ADA_DBSCAN/stDBSCAN.py	/^        def _calcDist(row):$/;"	f	function:Clusters.cluster
+_jsonSchemaTransform	schemaValidator.py	/^    def _jsonSchemaTransform(self):$/;"	m	class:ValidateRow
+_obj	ADA_DBSCAN/adaptive_dbscan.py	/^    def _obj(row):$/;"	f	function:pdApply
+_speed_series	ADA_DBSCAN/adaptive_dbscan.py	/^    def _speed_series(self):$/;"	m	class:cluster
+_validateBool	schemaValidator.py	/^    def _validateBool(self, value):$/;"	m	class:ValidateRow
+_validateFloat	schemaValidator.py	/^    def _validateFloat(self, value):$/;"	m	class:ValidateRow
+_validateInteger	schemaValidator.py	/^    def _validateInteger(self, value):$/;"	m	class:ValidateRow
+_validateRepeated	schemaValidator.py	/^    def _validateRepeated(self, schema, value):$/;"	m	class:ValidateRow
+_validateString	schemaValidator.py	/^    def _validateString(self, value):$/;"	m	class:ValidateRow
+_validateType	schemaValidator.py	/^    def _validateType(self, schema, value):$/;"	m	class:ValidateRow
+auc	leadScoring/modelScripts.py	/^from sklearn.metrics import roc_curve, auc, confusion_matrix$/;"	i
+average_precision_score	leadScoring/modelScripts.py	/^from sklearn.metrics import average_precision_score$/;"	i
 bigquery	googleCloud.py	/^from google.cloud import bigquery$/;"	i
 bqSchemaObj	googleCloud.py	/^    def bqSchemaObj(schemaObj):$/;"	f	function:genSchemaFromDict
 bqtable2gs	googleCloud.py	/^    def bqtable2gs(self, dataset_name, table_name, bucket, gspath, file_name,$/;"	m	class:GoogleCloud
+buildCategoricalDf	leadScoring/modelScripts.py	/^def buildCategoricalDf(df, catThreshold, excludedColumns, maxCategories=100):$/;"	f
+buildPivotColumn	leadScoring/modelScripts.py	/^def buildPivotColumn(orgCol, colVal):$/;"	f
+calcDist	ADA_DBSCAN/adaptive_dbscan.py	/^def calcDist(loc1, loc2):$/;"	f
+calcLogLoss	leadScoring/logReg.py	/^def calcLogLoss(X, y, model):$/;"	f
+calculate	ADA_DBSCAN/stDBSCAN.py	/^    def calculate(self, data):$/;"	m	class:Clusters
 client	googleCloud.py	/^    def client(self, project_id):$/;"	m	class:GoogleCloud
+cluster	ADA_DBSCAN/adaptive_dbscan.py	/^class cluster(object):$/;"	c
+cluster	ADA_DBSCAN/stDBSCAN.py	/^    def cluster(self, df):$/;"	m	class:Clusters
+cmx	leadScoring/modelScripts.py	/^import matplotlib.cm as cmx$/;"	i
+color_map	leadScoring/modelScripts.py	/^def color_map(group_vals, cmap_code):$/;"	f
+colors	leadScoring/modelScripts.py	/^import matplotlib.colors as colors$/;"	i
+concatDf	leadScoring/modelScripts.py	/^def concatDf(colList):$/;"	f
+confusion_matrix	leadScoring/modelScripts.py	/^from sklearn.metrics import roc_curve, auc, confusion_matrix$/;"	i
+cos	ADA_DBSCAN/stDBSCAN.py	/^from math import sin, cos$/;"	i
+createScaledArray	leadScoring/modelScripts.py	/^def createScaledArray(X, dictionary, expPredictors=None, mlbTransDict={}, scaler=None,$/;"	f
 createTable	googleCloud.py	/^    def createTable(self, table, dataset, schema):$/;"	m	class:GoogleCloud
+data_scaler	leadScoring/modelScripts.py	/^def data_scaler(X):$/;"	f
+datetime	leadScoring/modelScripts.py	/^from datetime import datetime$/;"	i
+daysSince	leadScoring/modelScripts.py	/^def daysSince(columnName, lastDate, dateFormat):$/;"	f
+daysSinceDf	leadScoring/modelScripts.py	/^def daysSinceDf(df, columnName, lastDate, dateFormat='%Y-%m-%d %H:%M:%S'):$/;"	f
+detectCategoricalColumns	leadScoring/modelScripts.py	/^def detectCategoricalColumns(data, threshold, maxCategories=100):$/;"	f
+df	ADA_DBSCAN/adaptive_dbscan.py	/^df = pd.read_csv('\/Users\/semeonbalagula\/work\/public\/ADA_DBSCAN\/data.csv')$/;"	v
+dropLowInfo	leadScoring/modelScripts.py	/^def dropLowInfo(df, thresh=0.0001, cat_prefix='cat_'):$/;"	f
 execute_query	googleCloud.py	/^    def execute_query(self, query, UseLegacySql=False):$/;"	m	class:GoogleCloud
+genColNames	leadScoring/modelScripts.py	/^    def genColNames(key, classes):$/;"	f	function:createScaledArray
 genSchemaFromDict	googleCloud.py	/^def genSchemaFromDict(schemaDict):$/;"	f
+generateCategories	leadScoring/modelScripts.py	/^def generateCategories(columns, X, categorical_prefix='cat_'):$/;"	f
+generateDummyVars	leadScoring/modelScripts.py	/^def generateDummyVars(df, categories):$/;"	f
+geodesic	ADA_DBSCAN/adaptive_dbscan.py	/^geodesic = pyproj.Geod(ellps='WGS84')$/;"	v
+getClusters	ADA_DBSCAN/stDBSCAN.py	/^    def getClusters(self):$/;"	m	class:Clusters
+getSparseCases	leadScoring/modelScripts.py	/^def getSparseCases(ser, sparseThresh=0.001, topCases=100, coverage=0.95):$/;"	f
+getSparseCasesCov	leadScoring/modelScripts.py	/^def getSparseCasesCov(ser, coverage=0.95):  $/;"	f
+group_vals_funct	leadScoring/modelScripts.py	/^def group_vals_funct(df, category_col, cmap_code='Accent'):$/;"	f
+index_marks	leadScoring/modelScripts.py	/^def index_marks(nrows, chunk_size):$/;"	f
+initializer	ADA_DBSCAN/utils.py	/^    def initializer():$/;"	f	function:run_in_procs
+joblib	leadScoring/modelScripts.py	/^import joblib$/;"	i
+json	schemaValidator.py	/^import json$/;"	i
+l1	leadScoring/neuralNets.py	/^from keras.regularizers import l2, l1$/;"	i
+l2	leadScoring/neuralNets.py	/^from keras.regularizers import l2, l1$/;"	i
+linestring	ADA_DBSCAN/adaptive_dbscan.py	/^from shapely.geometry import linestring$/;"	i
+linestringToList	ADA_DBSCAN/adaptive_dbscan.py	/^def linestringToList(lstr):$/;"	f
 list_blobs	googleCloud.py	/^    def list_blobs(self, bucket_name, path, endsWith=''):$/;"	m	class:GoogleCloud
 load	googleCloud.py	/^    def load(self, dataset, table, path, source_format, schema=None, bad_record_limit=0,$/;"	m	class:GoogleCloud
+matplotlib	leadScoring/modelScripts.py	/^import matplotlib$/;"	i
+matplotlib	leadScoring/modelScripts.py	/^import matplotlib.cm as cmx$/;"	i
+matplotlib	leadScoring/modelScripts.py	/^import matplotlib.colors as colors$/;"	i
+matplotlib	leadScoring/modelScripts.py	/^import matplotlib.pyplot as plt$/;"	i
+metrics	leadScoring/logReg.py	/^from sklearn import metrics$/;"	i
+metrics	leadScoring/neuralNets.py	/^from sklearn import metrics$/;"	i
+modelBuild	leadScoring/logReg.py	/^def modelBuild(X, Y, penalty, max_iter, tol, seed, lossFunction='log', n_jobs=2, alpha=0.00001):$/;"	f
+modelBuild	leadScoring/neuralNets.py	/^    def modelBuild(self, nodes, X_Train, y_Train, X_Test, y_Test, checkpointFile,$/;"	m	class:Keras
+multiprocessing	ADA_DBSCAN/utils.py	/^import multiprocessing$/;"	i
+np	leadScoring/logReg.py	/^import numpy as np$/;"	i
+np	leadScoring/modelScripts.py	/^import numpy as np$/;"	i
+obj	leadScoring/modelScripts.py	/^    def obj(row):$/;"	f	function:concatDf
+obj	leadScoring/modelScripts.py	/^    def obj(row):$/;"	f	function:daysSince
+ordered_join	leadScoring/modelScripts.py	/^def ordered_join(data):$/;"	f
+os	leadScoring/modelScripts.py	/^import os$/;"	i
 path	googleCloud.py	/^from os import path$/;"	i
+pd	ADA_DBSCAN/adaptive_dbscan.py	/^import pandas as pd$/;"	i
+pd	ADA_DBSCAN/stDBSCAN.py	/^import pandas as pd$/;"	i
+pd	leadScoring/logReg.py	/^import pandas as pd$/;"	i
+pd	leadScoring/modelScripts.py	/^import pandas as pd$/;"	i
+pdApply	ADA_DBSCAN/adaptive_dbscan.py	/^def pdApply(funct, df, column):$/;"	f
+plot_confusion_matrix	leadScoring/modelScripts.py	/^def plot_confusion_matrix(pred, y, names, title='Confusion matrix', cmap=plt.cm.Blues,$/;"	f
+plt	leadScoring/modelScripts.py	/^import matplotlib.pyplot as plt$/;"	i
+precisionRecall	leadScoring/modelScripts.py	/^def precisionRecall(pred, y):$/;"	f
+precision_recall_curve	leadScoring/modelScripts.py	/^from sklearn.metrics import precision_recall_curve$/;"	i
+precision_recall_plot	leadScoring/modelScripts.py	/^def precision_recall_plot(df, score_col_name, test_col_name, category_col=None,$/;"	f
+preprocessing	leadScoring/modelScripts.py	/^from sklearn import preprocessing$/;"	i
+pyproj	ADA_DBSCAN/adaptive_dbscan.py	/^import pyproj$/;"	i
+pyproj	ADA_DBSCAN/stDBSCAN.py	/^import pyproj$/;"	i
 query2table	googleCloud.py	/^    def query2table(self, query, dest_table, dest_dataset, create_disposition=CREATE_IF_NEEDED,$/;"	m	class:GoogleCloud
+reduce	ADA_DBSCAN/adaptive_dbscan.py	/^from functools import reduce$/;"	i
+reduce	leadScoring/modelScripts.py	/^from functools import reduce$/;"	i
+roc_curve	leadScoring/modelScripts.py	/^from sklearn.metrics import roc_curve, auc, confusion_matrix$/;"	i
+run_in_procs	ADA_DBSCAN/utils.py	/^def run_in_procs(func, func_args, processes, maxtasksperchild=1):$/;"	f
+scipy	ADA_DBSCAN/stDBSCAN.py	/^import scipy.spatial as spatial$/;"	i
+sin	ADA_DBSCAN/stDBSCAN.py	/^from math import sin, cos$/;"	i
+spatial	ADA_DBSCAN/stDBSCAN.py	/^import scipy.spatial as spatial$/;"	i
+split	leadScoring/modelScripts.py	/^def split(dfm, chunk_size):$/;"	f
+splitFrameToPeriods	ADA_DBSCAN/stDBSCAN.py	/^    def splitFrameToPeriods(self):$/;"	m	class:Clusters
 storage	googleCloud.py	/^from google.cloud import storage$/;"	i
+train_test_split	leadScoring/modelScripts.py	/^from sklearn.model_selection import train_test_split$/;"	i
+utils	ADA_DBSCAN/stDBSCAN.py	/^import utils$/;"	i
+validate	schemaValidator.py	/^    def validate(self, data=None, schema=None):$/;"	m	class:ValidateRow
+wkt	ADA_DBSCAN/adaptive_dbscan.py	/^from shapely import wkt$/;"	i

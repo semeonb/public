@@ -9,6 +9,6 @@ with open(schemaFile) as schema_data:
 with open(dataFile) as myfile:
     for data in myfile:
         print(data)
-        vldt = schemaValidator.Validate(jsonSchema, data)
-        x = vldt._validateLine()
+        vldt = schemaValidator.ValidateRow(jsonSchema, data)
+        x = vldt.validate()
         print(x)
