@@ -29,7 +29,7 @@ setuptools.setup(
         "azure-core==1.26.1",
         "azure-identity==1.12.0",
         "azure-storage-blob==12.14.1",
-        "sqlparse==0.4.3",
+        "sqlparse==0.4.4",
         "boto3==1.17.101",
         "pyodbc==4.0.35",
         "mysql-connector-python==8.0.31",
