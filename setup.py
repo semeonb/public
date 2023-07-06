@@ -13,7 +13,7 @@ setuptools.setup(
         "scikit-learn==0.24.0",
         "Keras==2.4.3",
         "tensorflow==2.3.1",
-        "joblib==0.13.2",
+        "joblib==1.2.0",
         "Keras-Preprocessing==1.1.2",
         "numpy==1.18.5",
         "pandas==0.24.2",
