@@ -9,7 +9,7 @@ setuptools.setup(
     packages=["airmelt_data", "airmelt_system"],
     install_requires=[
         "importlib-metadata==4.8.3",
-        "cryptography==38.0.0",
+        "cryptography==41.0.3",
         "scikit-learn==0.24.0",
         "Keras==2.4.3",
         "tensorflow==2.3.1",
