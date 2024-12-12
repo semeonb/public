@@ -1,0 +1,34 @@
+name: codereil_ai
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - setuptools
+  - scikit-learn
+  - keras  # Keras is available in Conda
+  - tensorflow
+  - joblib
+  - keras-preprocessing
+  - numpy
+  - pandas
+  - google-cloud-bigquery
+  - google-cloud-storage
+  - google-cloud-core
+  - docopt
+  - slacker
+  - sqlparse
+  - pyodbc
+  - xgboost
+  - pymysql
+  - db-dtypes
+  - nltk
+  - spacy
+  - pyenchant
+  - sqlalchemy  # lowercase for conda
+  - boto3
+  - pip
+  - pip:
+      - lifetimes  # Some packages might not exist in Conda, so install via pip
+      - ndjson
+      - mysql-connector
