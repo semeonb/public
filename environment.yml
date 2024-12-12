@@ -1,4 +1,4 @@
-name: codereil_ai
+name: airmelt_ai
 channels:
   - defaults
   - conda-forge

@@ -24,9 +24,9 @@ This installs the package specified by setup.py in editable mode, making it easy
 
 ### Step 3: Verify the Installation
 To check if the environment and package were installed correctly, you can import the package in Python:
-`python -c "import codereil_ai_package_name"`
+`python -c "import {package_name}"`
 
-Replace codereil_ai_package_name with the actual name of the package as detected by find_packages().
+Replace {package_name} with the actual name of the package as detected by find_packages().
 
 
 ## Update the Package ##
